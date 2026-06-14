@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ lead.full_name }}</title>
+</head>
+<body>
+
+<h1>{{ lead.full_name }}</h1>
+
+<p><strong>Телефон:</strong> {{ lead.phone }}</p>
+<p><strong>Email:</strong> {{ lead.email }}</p>
+<p><strong>Рекламная кампания:</strong> {{ lead.campaign }}</p>
+
+<p>
+    <a href="{% url 'crm:lead_update' lead.pk %}">Редактировать</a>
+</p>
+
+<p>
+    <a href="{% url 'crm:lead_delete' lead.pk %}">Удалить</a>
+</p>
+
+<p>
+    <a href="{% url 'crm:lead_list' %}">Назад</a>
+</p>
+
+</body>
+</html>

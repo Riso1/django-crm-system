@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import AdvertisingCampaign, Service
+from .models import AdvertisingCampaign, Lead, Service
 
 
 class AdvertisingCampaignForm(forms.ModelForm):
@@ -12,6 +12,18 @@ class AdvertisingCampaignForm(forms.ModelForm):
             'service',
             'channel',
             'budget',
+        )
+
+
+class LeadForm(forms.ModelForm):
+
+    class Meta:
+        model = Lead
+        fields = (
+            'full_name',
+            'phone',
+            'email',
+            'campaign',
         )
 
 

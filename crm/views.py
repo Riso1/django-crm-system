@@ -1,3 +1,4 @@
+from django.urls import reverse_lazy
 from django.views.generic import (
     CreateView,
     DeleteView,
@@ -5,10 +6,9 @@ from django.views.generic import (
     ListView,
     UpdateView,
 )
-from django.urls import reverse_lazy
 
-from .forms import AdvertisingCampaignForm, ServiceForm
-from .models import AdvertisingCampaign, Service
+from .forms import AdvertisingCampaignForm, LeadForm, ServiceForm
+from .models import AdvertisingCampaign, Lead, Service
 
 
 class ServiceListView(ListView):
@@ -69,3 +69,33 @@ class AdvertisingCampaignDeleteView(DeleteView):
     model = AdvertisingCampaign
     template_name = 'crm/campaign_confirm_delete.html'
     success_url = reverse_lazy('crm:campaign_list')
+
+
+class LeadListView(ListView):
+    model = Lead
+    template_name = 'crm/lead_list.html'
+    context_object_name = 'leads'
+
+
+class LeadDetailView(DetailView):
+    model = Lead
+    template_name = 'crm/lead_detail.html'
+    context_object_name = 'lead'
+
+
+class LeadCreateView(CreateView):
+    model = Lead
+    form_class = LeadForm
+    template_name = 'crm/lead_form.html'
+
+
+class LeadUpdateView(UpdateView):
+    model = Lead
+    form_class = LeadForm
+    template_name = 'crm/lead_form.html'
+
+
+class LeadDeleteView(DeleteView):
+    model = Lead
+    template_name = 'crm/lead_confirm_delete.html'
+    success_url = reverse_lazy('crm:lead_list')

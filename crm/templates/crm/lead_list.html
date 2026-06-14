@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Потенциальные клиенты</title>
+</head>
+<body>
+
+<h1>Потенциальные клиенты</h1>
+
+<p>
+    <a href="{% url 'crm:lead_create' %}">Создать потенциального клиента</a>
+</p>
+
+{% if leads %}
+    <ul>
+        {% for lead in leads %}
+            <li>
+                <a href="{% url 'crm:lead_detail' lead.pk %}">
+                    {{ lead.full_name }}
+                </a>
+                — {{ lead.phone }} / {{ lead.email }} / {{ lead.campaign }}
+
+                <a href="{% url 'crm:lead_update' lead.pk %}">Редактировать</a>
+                <a href="{% url 'crm:lead_delete' lead.pk %}">Удалить</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Потенциальных клиентов пока нет.</p>
+{% endif %}
+
+<p>
+    <a href="{% url 'crm:campaign_list' %}">К рекламным кампаниям</a>
+</p>
+
+</body>
+</html>

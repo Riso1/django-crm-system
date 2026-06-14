@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Услуга</title>
+</head>
+<body>
+
+<h1>Услуга</h1>
+
+<form method="post">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">
+        Сохранить
+    </button>
+
+</form>
+
+<p>
+    <a href="{% url 'crm:service_list' %}">
+        Назад
+    </a>
+</p>
+
+</body>
+</html>

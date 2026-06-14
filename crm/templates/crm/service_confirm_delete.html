@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Удаление</title>
+</head>
+<body>
+
+<h1>Удалить услугу?</h1>
+
+<p>
+
+    {{ service.name }}
+
+</p>
+
+<form method="post">
+
+    {% csrf_token %}
+
+    <button type="submit">
+
+        Да, удалить
+
+    </button>
+
+</form>
+
+<p>
+
+    <a href="{% url 'crm:service_detail' service.pk %}">
+
+        Отмена
+
+    </a>
+
+</p>
+
+</body>
+</html>

@@ -23,6 +23,13 @@
 
                 <a href="{% url 'crm:lead_update' lead.pk %}">Редактировать</a>
                 <a href="{% url 'crm:lead_delete' lead.pk %}">Удалить</a>
+                {% if lead.is_active_customer %}
+                    Активный клиент создан
+                {% else %}
+                    <a href="{% url 'crm:customer_create' lead.pk %}">
+                        Перевести в активные
+                    </a>
+                {% endif %}
             </li>
         {% endfor %}
     </ul>

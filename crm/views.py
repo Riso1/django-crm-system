@@ -1,4 +1,5 @@
 from django.urls import reverse_lazy
+from django.shortcuts import get_object_or_404
 from django.views.generic import (
     CreateView,
     DeleteView,
@@ -10,10 +11,17 @@ from django.views.generic import (
 from .forms import (
     AdvertisingCampaignForm,
     ContractForm,
+    CustomerForm,
     LeadForm,
     ServiceForm,
 )
-from .models import AdvertisingCampaign, Contract, Lead, Service
+from .models import (
+    AdvertisingCampaign,
+    Contract,
+    Customer,
+    Lead,
+    Service
+)
 
 
 class ServiceListView(ListView):
@@ -134,3 +142,45 @@ class ContractDeleteView(DeleteView):
     model = Contract
     template_name = 'crm/contract_confirm_delete.html'
     success_url = reverse_lazy('crm:contract_list')
+
+
+class CustomerListView(ListView):
+    model = Customer
+    template_name = 'crm/customer_list.html'
+    context_object_name = 'customers'
+
+
+class CustomerDetailView(DetailView):
+    model = Customer
+    template_name = 'crm/customer_detail.html'
+    context_object_name = 'customer'
+
+
+class CustomerUpdateView(UpdateView):
+    model = Customer
+    form_class = CustomerForm
+    template_name = 'crm/customer_form.html'
+
+
+class CustomerDeleteView(DeleteView):
+    model = Customer
+    template_name = 'crm/customer_confirm_delete.html'
+    success_url = reverse_lazy('crm:customer_list')
+
+
+class CustomerCreateView(CreateView):
+    model = Customer
+    form_class = CustomerForm
+    template_name = 'crm/customer_form.html'
+
+    def get_initial(self):
+        initial = super().get_initial()
+
+        lead = get_object_or_404(
+            Lead,
+            pk=self.kwargs['lead_pk'],
+        )
+
+        initial['lead'] = lead
+
+        return initial

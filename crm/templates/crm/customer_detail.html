@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ customer.lead.full_name }}</title>
+</head>
+<body>
+
+<h1>{{ customer.lead.full_name }}</h1>
+
+<p><strong>Телефон:</strong> {{ customer.lead.phone }}</p>
+<p><strong>Email:</strong> {{ customer.lead.email }}</p>
+<p><strong>Рекламная кампания:</strong> {{ customer.lead.campaign }}</p>
+<p><strong>Контракт:</strong> {{ customer.contract }}</p>
+
+<p><a href="{% url 'crm:customer_update' customer.pk %}">Редактировать</a></p>
+<p><a href="{% url 'crm:customer_delete' customer.pk %}">Удалить</a></p>
+<p><a href="{% url 'crm:customer_list' %}">Назад</a></p>
+
+</body>
+</html>

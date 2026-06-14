@@ -69,6 +69,13 @@ class Lead(models.Model):
     def get_absolute_url(self):
         return reverse('crm:lead_detail', kwargs={'pk': self.pk})
 
+    @property
+    def is_active_customer(self):
+        try:
+            return self.customer is not None
+        except Customer.DoesNotExist:
+            return False
+
 
 class Contract(models.Model):
     name = models.CharField(max_length=150, unique=True, verbose_name='Название')

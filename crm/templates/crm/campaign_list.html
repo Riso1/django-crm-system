@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Рекламные кампании</title>
+</head>
+<body>
+    <h1>Рекламные кампании</h1>
+
+    <p>
+        <a href="{% url 'crm:campaign_create' %}">Создать рекламную кампанию</a>
+    </p>
+
+    {% if campaigns %}
+        <ul>
+            {% for campaign in campaigns %}
+                <li>
+                    <a href="{% url 'crm:campaign_detail' campaign.pk %}">
+                        {{ campaign.name }}
+                    </a>
+                    — {{ campaign.service }} / {{ campaign.channel }} / {{ campaign.budget }} ₽
+
+                    <a href="{% url 'crm:campaign_update' campaign.pk %}">Редактировать</a>
+                    <a href="{% url 'crm:campaign_delete' campaign.pk %}">Удалить</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Рекламных кампаний пока нет.</p>
+    {% endif %}
+
+    <p>
+        <a href="{% url 'crm:service_list' %}">К услугам</a>
+    </p>
+</body>
+</html>

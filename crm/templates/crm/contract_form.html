@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Контракт</title>
+</head>
+<body>
+
+<h1>Контракт</h1>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit">Сохранить</button>
+</form>
+
+<p>
+    <a href="{% url 'crm:contract_list' %}">Назад</a>
+</p>
+
+</body>
+</html>

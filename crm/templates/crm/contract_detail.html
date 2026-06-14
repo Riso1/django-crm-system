@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ contract.name }}</title>
+</head>
+<body>
+
+<h1>{{ contract.name }}</h1>
+
+<p><strong>Услуга:</strong> {{ contract.service }}</p>
+<p><strong>Дата заключения:</strong> {{ contract.signed_at }}</p>
+<p><strong>Действует до:</strong> {{ contract.valid_until }}</p>
+<p><strong>Сумма:</strong> {{ contract.amount }} ₽</p>
+
+{% if contract.document %}
+    <p>
+        <strong>Документ:</strong>
+        <a href="{{ contract.document.url }}">Открыть файл</a>
+    </p>
+{% endif %}
+
+<p><a href="{% url 'crm:contract_update' contract.pk %}">Редактировать</a></p>
+<p><a href="{% url 'crm:contract_delete' contract.pk %}">Удалить</a></p>
+<p><a href="{% url 'crm:contract_list' %}">Назад</a></p>
+
+</body>
+</html>

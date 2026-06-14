@@ -16,6 +16,11 @@ from .views import (
     ServiceDetailView,
     ServiceListView,
     ServiceUpdateView,
+    ContractCreateView,
+    ContractDeleteView,
+    ContractDetailView,
+    ContractListView,
+    ContractUpdateView,
 )
 
 app_name = 'crm'
@@ -38,4 +43,10 @@ urlpatterns = [
     path('leads/<int:pk>/', LeadDetailView.as_view(), name='lead_detail'),
     path('leads/<int:pk>/update/', LeadUpdateView.as_view(), name='lead_update'),
     path('leads/<int:pk>/delete/', LeadDeleteView.as_view(), name='lead_delete'),
+
+    path('contracts/', ContractListView.as_view(), name='contract_list'),
+    path('contracts/create/', ContractCreateView.as_view(), name='contract_create'),
+    path('contracts/<int:pk>/', ContractDetailView.as_view(), name='contract_detail'),
+    path('contracts/<int:pk>/update/', ContractUpdateView.as_view(), name='contract_update'),
+    path('contracts/<int:pk>/delete/', ContractDeleteView.as_view(), name='contract_delete'),
 ]

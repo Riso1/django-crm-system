@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Контракты</title>
+</head>
+<body>
+
+<h1>Контракты</h1>
+
+<p>
+    <a href="{% url 'crm:contract_create' %}">Создать контракт</a>
+</p>
+
+{% if contracts %}
+    <ul>
+        {% for contract in contracts %}
+            <li>
+                <a href="{% url 'crm:contract_detail' contract.pk %}">
+                    {{ contract.name }}
+                </a>
+                — {{ contract.service }} / {{ contract.amount }} ₽
+
+                <a href="{% url 'crm:contract_update' contract.pk %}">Редактировать</a>
+                <a href="{% url 'crm:contract_delete' contract.pk %}">Удалить</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Контрактов пока нет.</p>
+{% endif %}
+
+<p>
+    <a href="{% url 'crm:lead_list' %}">К потенциальным клиентам</a>
+</p>
+
+</body>
+</html>

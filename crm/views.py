@@ -7,8 +7,13 @@ from django.views.generic import (
     UpdateView,
 )
 
-from .forms import AdvertisingCampaignForm, LeadForm, ServiceForm
-from .models import AdvertisingCampaign, Lead, Service
+from .forms import (
+    AdvertisingCampaignForm,
+    ContractForm,
+    LeadForm,
+    ServiceForm,
+)
+from .models import AdvertisingCampaign, Contract, Lead, Service
 
 
 class ServiceListView(ListView):
@@ -99,3 +104,33 @@ class LeadDeleteView(DeleteView):
     model = Lead
     template_name = 'crm/lead_confirm_delete.html'
     success_url = reverse_lazy('crm:lead_list')
+
+
+class ContractListView(ListView):
+    model = Contract
+    template_name = 'crm/contract_list.html'
+    context_object_name = 'contracts'
+
+
+class ContractDetailView(DetailView):
+    model = Contract
+    template_name = 'crm/contract_detail.html'
+    context_object_name = 'contract'
+
+
+class ContractCreateView(CreateView):
+    model = Contract
+    form_class = ContractForm
+    template_name = 'crm/contract_form.html'
+
+
+class ContractUpdateView(UpdateView):
+    model = Contract
+    form_class = ContractForm
+    template_name = 'crm/contract_form.html'
+
+
+class ContractDeleteView(DeleteView):
+    model = Contract
+    template_name = 'crm/contract_confirm_delete.html'
+    success_url = reverse_lazy('crm:contract_list')

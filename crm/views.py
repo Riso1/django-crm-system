@@ -1,5 +1,6 @@
 from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404
+from django.db.models import Count, Sum
 from django.views.generic import (
     CreateView,
     DeleteView,
@@ -184,3 +185,22 @@ class CustomerCreateView(CreateView):
         initial['lead'] = lead
 
         return initial
+
+
+class CampaignStatsView(ListView):
+    model = AdvertisingCampaign
+    template_name = 'crm/campaign_stats.html'
+    context_object_name = 'campaigns'
+
+    def get_queryset(self):
+        campaigns = AdvertisingCampaign.objects.annotate(
+            leads_count=Count('leads', distinct=True),
+            customers_count=Count('leads__customer', distinct=True),
+            income=Sum('leads__customer__contract__amount'),
+        )
+
+        for campaign in campaigns:
+            income = campaign.income or 0
+            campaign.profit = income - campaign.budget
+
+        return campaigns

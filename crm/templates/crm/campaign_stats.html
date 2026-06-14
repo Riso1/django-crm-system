@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Статистика рекламных кампаний</title>
+</head>
+<body>
+
+<h1>Статистика рекламных кампаний</h1>
+
+<table border="1" cellpadding="8">
+    <thead>
+        <tr>
+            <th>Кампания</th>
+            <th>Лиды</th>
+            <th>Активные клиенты</th>
+            <th>Доход</th>
+            <th>Бюджет</th>
+            <th>Прибыль</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for campaign in campaigns %}
+            <tr>
+                <td>{{ campaign.name }}</td>
+                <td>{{ campaign.leads_count }}</td>
+                <td>{{ campaign.customers_count }}</td>
+                <td>{{ campaign.income|default:0 }} ₽</td>
+                <td>{{ campaign.budget }} ₽</td>
+                <td>{{ campaign.profit }} ₽</td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="6">Рекламных кампаний пока нет.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<p>
+    <a href="{% url 'crm:campaign_list' %}">К рекламным кампаниям</a>
+</p>
+
+</body>
+</html>

@@ -26,6 +26,7 @@ from .views import (
     CustomerDetailView,
     CustomerListView,
     CustomerUpdateView,
+    CampaignStatsView,
 )
 
 app_name = 'crm'
@@ -60,4 +61,6 @@ urlpatterns = [
     path('customers/<int:pk>/', CustomerDetailView.as_view(), name='customer_detail'),
     path('customers/<int:pk>/update/', CustomerUpdateView.as_view(), name='customer_update'),
     path('customers/<int:pk>/delete/', CustomerDeleteView.as_view(), name='customer_delete'),
+
+    path('stats/', CampaignStatsView.as_view(), name='campaign_stats'),
 ]

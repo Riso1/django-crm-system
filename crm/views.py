@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count, Sum
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
@@ -25,7 +26,7 @@ from .models import (
 )
 
 
-class ServiceListView(ListView):
+class ServiceListView(LoginRequiredMixin, ListView):
     model = Service
     template_name = 'products/products-list.html'
     context_object_name = 'products'
